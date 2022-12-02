@@ -105,12 +105,25 @@ def Turnmeshtosphere(points, center, radius):
         print('Rad:', Rad)
     return Rad
 
-points=[[1,1,1],
-        [2,1,2],
-        [3,-1,-1],
-        [1,4,4],
-        [6,6,6]]
+#read the object file.
+objFilePath = '/home/xin/Downloads/my_temp_part6.obj'
+with open(objFilePath) as file:
+    points = []
+    face = []
+    while 1:
+        line = file.readline()
+        if not line:
+            break
+        strs = line.split(" ")
+        if strs[0] == "v":
+            points.append((float(strs[1]),float(strs[2]),float(strs[3])))
+        if strs[0] == "f":
+            face.append((int(strs[1]),int(strs[2]),int(strs[3])))
+#I get points set and surfaces set
+points = np.array(points)
+face = np.array(face)
+
 center, radius, point1, point2=outersphere(points)
 print('center:',center,'radius:',radius)
 Rad=Turnmeshtosphere(points,center,radius)
-print('Rad:',Rad)
+print('Rad:',Rad,'Center:',center)
