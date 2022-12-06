@@ -35,6 +35,7 @@ def inscribedSphereViaPointMesh(center, mesh):
     radius = 1e10
     for v_vt_vn in mesh.polygons:
         tri = getTri(v_vt_vn)
+
         P = np.array(mesh.vertices[tri[0]])
         Q = np.array(mesh.vertices[tri[1]])
         R = np.array(mesh.vertices[tri[2]])
@@ -72,6 +73,7 @@ def pointInMesh(point, mesh):
     isPositive = False
     for v_vt_vn in mesh.polygons:
         tri = getTri(v_vt_vn)
+
         P = np.array(mesh.vertices[tri[0]])
         Q = np.array(mesh.vertices[tri[1]])
         R = np.array(mesh.vertices[tri[2]])
@@ -133,8 +135,6 @@ def sliceMesh(mesh, normal, origin):
     for i in range(len(new_v)):
         new_mesh.vertices.append(new_v[i, :])
     for i in range(len(new_f)):
-        new_mesh.polygons.append([[new_f[i,0], -1], [new_f[i,1], -1], [new_f[i,2], -1]])
+        new_mesh.polygons.append(([new_f[i,0], -1, -1], [new_f[i,1], -1, -1], [new_f[i,2], -1, -1]))
 
     return new_mesh
-
-

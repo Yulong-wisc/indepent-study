@@ -9,7 +9,7 @@ import argparse, sys
 import vtk
 import meshplex
 import trimesh
-
+import math
 parser = argparse.ArgumentParser(description=__doc__, formatter_class=
         argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("--input_obj", "-i", type=str, dest="input_obj", default="mesh.obj", help="File name of the .obj input")
@@ -37,7 +37,7 @@ p.vhacd(args.input_obj, args.convex_obj, args.convex_log, concavity=0.0025, alph
 #############################################################################################################################
 parts = wf.load_obj(args.convex_obj)#, triangulate=True)
 
-if (len(parts) == 1):
+'''if (len(parts) == 1):
     parts = []
     parts.append(wf.load_obj(args.convex_obj)[0])
 
@@ -54,30 +54,36 @@ if (len(parts) == 1):
                 cut_result.append(halfA)
             if len(halfB.vertices) > 0:
                 cut_result.append(halfB)
-        parts = cut_result
+        parts = cut_result'''
 
 xyzr = np.zeros((len(parts), 4))
 part_id = 0
-
+print(xyzr)
 #1. the ratio of length and width
 box_length =[]
 box_width = []
 box_ratio=[]
 box_diference=[]
+volume_percentage = []
+
 
 # 3.the percentage that the part takes refer to the whole object
 
-whole_mesh = trimesh.load('bear.obj')
+whole_mesh = trimesh.load('parts.obj')
 whole_volume=whole_mesh.volume
-print(whole_volume)
+#part_volume=whole_mesh[0].volume
 
+#print(whole_volume)
+#print(part_volume)
+#max_convex_num=input();
+#while(len(parts)<=max_convex_num):
 
 for part in parts:
 
     bounding_box = util.bbox(part.vertices)
 
     #1. get the length, width of the box and their ratio
-    box_length.append(bounding_box[1,2]-bounding_box[0,2]) #the difference of the z axis value
+    box_length.append( math.sqrt( (bounding_box[1,0]-bounding_box[0,0])**2 + (bounding_box[1,1]-bounding_box[0,1])**2 + (bounding_box[1,2]-bounding_box[0,2])**2)) #the difference of the z axis value
     a = [bounding_box[1,1]-bounding_box[0,1],bounding_box[1,0]-bounding_box[0,0]] #the difference of x axis and y axis
     box_width.append(min(a))
     box_ratio.append(box_length[part_id]/box_width[part_id])
@@ -101,31 +107,99 @@ for part in parts:
     '''verts = np.array(part.vertices)
     faces = np.empty((len(part.polygons), 3), dtype=int)
     mesh = meshplex.MeshTri(np.array(verts), np.array(faces))
-
+    
     V = mesh.volume
-
+    
     print("Volume =", V)'''
 
-    verts = np.array(part.vertices)
+    '''verts = np.array(part.vertices)
     faces = np.empty((len(part.polygons), 3), dtype=int)
-
+    
     mesh = meshplex.MeshTri(verts, faces)
-
+    
     V = np.sum(mesh.cell_volumes)
+    
+    part_volume = trimesh.visual'''
 
-    part_volume = trimesh.visual
     #p_mesh = trimesh.load(args.convex_obj[0][0])
     #p_volume = p.volume
 
+    filename = "my_temp_part" + str(part_id) + ".obj"
+
+    wf.save_obj(part, filename)
+    part_mesh = trimesh.load(filename)
+    part_volume = part_mesh.volume
+    #print(part_volume)
+    volume_percentage.append(part_volume/whole_volume)
+    part_id += 1
+    pass
+
+
+
+
+
+weight1 = 1/3
+weight2 = 1/3
+weight3 = 2 / 3
+
+box_judge = []
+for i in range(len(parts)):
+    box_judge.append(weight1 * box_ratio[i] + weight2 * box_diference[i] + weight3 * volume_percentage[i])
+# print(box_judge[i])
+pass
+##outputting critical convex
+output_convex_id = box_judge.index(max(box_judge))
+print("%d",output_convex_id)
+out_put_convex = parts[output_convex_id+1]
+print("%d",out_put_convex)
 
 
 
 
 
 
+##cutting the critical convex into two parts
+'''planes = [[-0.91073949, 10.05606754, 2.68031705]]
+normals = [[-3.54744241, -2.447003, -0.12203631]]
+cut_result = []
+halfA = util.sliceMesh(out_put_convex, normals, planes)
+halfB = util.sliceMesh(out_put_convex, -normals, planes)
+if len(halfA.vertices) > 0:
+    cut_result.append(halfA)
+if len(halfB.vertices) > 0:
+    cut_result.append(halfB)'''
 
+#parts.remove(out_put_convex)
+print("%d",len(parts))
+#parts.append(cut_result)
+#xyzr = np.zeros((len(parts), 4))
+print("%d",len(parts))
+
+
+
+
+
+##try
+part_id=0;
+for part in parts:
+
+    bounding_box = util.bbox(part.vertices)
+    big_sphere = util.box2ball(bounding_box)
+
+    mesh_center = util.coord_avg(part.vertices)
+
+    small_sphere = util.inscribedSphereViaPointMesh(mesh_center, part)
+
+    decomp_sphere = util.interpolateSphere(big_sphere, small_sphere, args.ratio)
+    xyzr[part_id, :3] = decomp_sphere.center
+    xyzr[part_id, -1] = decomp_sphere.radius
     part_id += 1
 
+
+
+
+
+#parts.append(input)
 
 
 """Max = box_ratio[0]
@@ -155,13 +229,24 @@ for part in parts:
 
 
 #assign the weight to the three criteria
-'''weight1=
-weight2=
-weight3='''
+'''weight1= 2/3
+weight2= 1/6
+weight3= 1/6
+
+box_judge= []
+for i in range(len(parts)):
+    box_judge.append(weight1*box_ratio[i]+weight2*box_diference[i]+weight3*volume_percentage[i])
+    #print(box_judge[i])
+    pass
+
+print('the most critical mesh is convex %d' %(box_judge.index(max(box_judge))+1))'''
 
 
 
 
+'''print("%d",len(args.convex_obj)) #parts.obj
+print("%d",len(args.approx_csv)) #quickapproximation.cvs
+print("%d",len(args.output_csv)) #result.cvs'''
 
 
 np.savetxt(args.approx_csv, xyzr, header = "x,y,z,r", delimiter=",")

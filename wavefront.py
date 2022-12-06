@@ -82,7 +82,7 @@ def load_obj( filename: str, default_mtl='default_mtl', triangulate=False ) -> W
         return obj
 
 # save function disabled due to that file may contain multiple objects
-"""
+
 def save_obj( obj: WavefrontOBJ, filename: str ):
     with open( filename, 'w' ) as ofile:
         for mlib in obj.mtllibs:
@@ -104,10 +104,14 @@ def save_obj( obj: WavefrontOBJ, filename: str ):
             pstr = 'f '
             for v in obj.polygons[pid]:
                 # UGLY!
-                vstr = '{}/{}/{} '.format(v[0]+1,v[1]+1 if v[1] >= 0 else 'X', v[2]+1 if v[2] >= 0 else 'X' )
-                vstr = vstr.replace('/X/','//').replace('/X ', ' ')
+                try:
+                    vstr = '{}/{}/{} '.format(v[0][0] + 1, v[1][0] + 1 if v[1][0] >= 0 else 'X',
+                                              v[2][0] + 1 if v[2][0] >= 0 else 'X')
+                except:
+                    vstr = '{}/{}/{} '.format(v[0] + 1, v[1] + 1 if v[1] >= 0 else 'X', v[2] + 1 if v[2] >= 0 else 'X')
+                vstr = vstr.replace('/X/','//').replace('/X ', ' ').replace('/','')
                 pstr += vstr
             ofile.write( pstr+'\n')
-"""
+
 
 

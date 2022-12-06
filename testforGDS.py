@@ -3,8 +3,7 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-import cv2
-import imutils
+
 
 def surface(Bpoint1, Bpoint2, Bpoint3):
     set=[]
@@ -213,7 +212,7 @@ def circle(r,origX,origY,origZ):
 
 #------------------------------------------------------------
 #read the object file.
-objFilePath = '/home/xin/Downloads/my_temp_part7(1).obj'
+'''objFilePath = '/home/xin/Downloads/my_temp_part7(1).obj'
 with open(objFilePath) as file:
     points = []
     face = []
@@ -260,4 +259,4 @@ x1,y1,z1=circle(Radius,spherepoint1[0],spherepoint1[1],spherepoint1[2])
 ax.plot_surface(x1,y1,z1,color='g')
 x2,y2,z2=circle(radius,spherepoint2[0],spherepoint2[1],spherepoint2[2])
 ax.plot_surface(x2,y2,z2,color='y')
-plt.show()
+plt.show()'''

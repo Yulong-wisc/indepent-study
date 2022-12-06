@@ -27,7 +27,7 @@ def Newsurf(R,r,d,center1,center2):
     normal=vector1
     return origin, normal
 
-R=1.3599742384857518
+'''R=1.3599742384857518
 r=2.7759750362659563
 
 a=[10.10190834,1.34563084,2.1240758 ]
@@ -44,4 +44,4 @@ if d<=R+r:
 normal=np.array(normal)
 #normal=normal/((normal[0]**2+normal[1]**2+normal[2]**2)**0.5)
 
-print('origin:',origin,'normal:', normal)
+print('origin:',origin,'normal:', normal)'''
