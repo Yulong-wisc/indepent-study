@@ -83,6 +83,7 @@ whole_volume = whole_mesh.volume
 
 # print(whole_volume)
 # print(part_volume)
+
 loop_time=0
 max_num_loops=int(input())
 print(max_num_loops)
@@ -187,13 +188,13 @@ while(loop_time<max_num_loops):
     # split the object with the same volume, and compare the variance to get the best one.
     # spherepoint1,spherepoint2,Radius,radius,Vari=split(Volume,point1,point2,set)
     spherepoint1, spherepoint2, Radius, radius, Vari = testforGDS.split(Volume, point1, point2, points)
-   #print('point1:', spherepoint1, 'point2:', spherepoint2)
-   # print('Radius:', Radius, 'radius:', radius, 'Vari:', Vari)
+    print('point1:', spherepoint1, 'point2:', spherepoint2)
+    print('Radius:', Radius, 'radius:', radius, 'Vari:', Vari)
 
     R = Radius
     r = radius
-    a = point1
-    b = point2
+    a = spherepoint1
+    b = spherepoint2
     d = ((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2 + (a[2] - b[2]) ** 2) ** 0.5
 
     if d > R + r:
@@ -206,7 +207,7 @@ while(loop_time<max_num_loops):
     normal = np.array(normal)
     normal=normal/((normal[0]**2+normal[1]**2+normal[2]**2)**0.5)
 
-    #print('origin:', origin, 'normal:', normal)
+    print('origin:', origin, 'normal:', normal)
 
 
 
