@@ -8,7 +8,9 @@ This project is for the Granular Dynamic Solver, which aims to model the object 
 
 How to install:
 pip3 install pybullet --upgrade --user
+
 pip3 install Pillow
+
 pip3 install trimesh
 
 
