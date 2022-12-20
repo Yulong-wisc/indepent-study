@@ -43,12 +43,13 @@ Fifth iteration:
 
 
 The football:
-The original object:
 
+The original object:
+![](image/football.png)
 
 Third iteration:
 
-
+![](image/football_third_iteration.png)
 
 Links:                 
 Xin WEI, Yulong YUE from the University of Wisconsin-madison
