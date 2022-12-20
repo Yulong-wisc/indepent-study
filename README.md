@@ -22,7 +22,7 @@ After that please give an input for this script to run. That input indicates how
 Examples:
 The bear:
 The original object:
-image/original bear.png
+![Image text]image/original bear.png
 First iteration:
 
 Third iteration:
