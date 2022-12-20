@@ -31,6 +31,9 @@ First iteration:
 ![](image/first%20iteration.png)
 
 Third iteration:
+![](image/third%20iteration.png)
+![](image/third_iteration.png)
+
 
 Fifth iteration:
 
