@@ -22,7 +22,7 @@ After that please give an input for this script to run. That input indicates how
 Examples:
 The bear:
 The original object:
-https://github.com/Yulong-wisc/indepent-study/blob/7aa1b9c3ff4a54305a5993570bbbc2dd2c23250d/image/original%20bear.png
+image/original bear.png
 First iteration:
 
 Third iteration:
