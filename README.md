@@ -45,6 +45,7 @@ Fifth iteration:
 The football:
 
 The original object:
+
 ![](image/football.png)
 
 Third iteration:
