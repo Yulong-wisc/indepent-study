@@ -19,6 +19,8 @@ pip3 install trimesh
 How to use: 
 
 Type this statement in your terminal: python3 convex_revised.py -i (input  file name in obj format) -o result.csv -c parts.obj -v 1000000 -r 0.6 
+
+
 After that please give an input for this script to run. That input indicates how many times you want the function to run. The suggested number is from 1 to 5. Numbers that are out of this range might give you a bad result.
 
 Examples,
