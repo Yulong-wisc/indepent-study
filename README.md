@@ -24,6 +24,8 @@ Examples,
 The original object:
 
 ![](image/original%20bear.png)
+![](image/original_bear.png)
+
 First iteration:
 
 Third iteration:
