@@ -27,6 +27,7 @@ The original object:
 ![](image/original_bear.png)
 
 First iteration:
+![](image/first%20iteration.png)
 
 Third iteration:
 
