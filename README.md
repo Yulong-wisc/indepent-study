@@ -31,11 +31,16 @@ First iteration:
 ![](image/first%20iteration.png)
 
 Third iteration:
+
 ![](image/third%20iteration.png)
 ![](image/third_iteration.png)
 
 
 Fifth iteration:
+
+![](image/fifth%20iteration.png)
+![](image/fifth_iteration.png)
+
 
 The football:
 The original object:
