@@ -23,7 +23,7 @@ Examples,
 
 The original object:
 
-![Image text]https://github.com/Yulong-wisc/indepent-study/blob/87d6c3d44b88918b82a7fb87bd4f0023fc32a31f/image/original%20bear.png
+![alt text]https://github.com/Yulong-wisc/indepent-study/blob/87d6c3d44b88918b82a7fb87bd4f0023fc32a31f/image/original%20bear.png
 First iteration:
 
 Third iteration:
